@@ -1,17 +1,17 @@
 ﻿cls
 $cred = get-credential -Message 'Please enter your domain admin credentials'
-$ADSession = New-PSSession -ComputerName 'NFEYOCNDDCS1' -Credential ($cred)
+$ADSession = New-PSSession -ComputerName $server -Credential ($cred)
 $PSSessionID = $ADSession.Id
 
 Invoke-Command $ADSession -scriptblock { Import-Module ActiveDirectory } | out-null
 
 Import-PSSession -Session $ADSession -Module ActiveDirectory -AllowClobber | out-null
 
-$DomAccounts = Get-ADUser -SearchBase "OU=Domain Administrator Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil" -Filter * | select -ExpandProperty SamAccountName
-$AdmAccounts = Get-ADUser -SearchBase "OU=Administrative User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil" -Filter * | select -ExpandProperty SamAccountName
-$UsrAccounts = Get-ADUser -SearchBase "OU=User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil" -Filter * | select -ExpandProperty SamAccountName
-$AAAaccounts = Get-ADUser -SearchBase "OU=AAA User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil" -Filter * | select -ExpandProperty SamAccountName
-$PusAccounts = Get-ADUser -SearchBase "OU=PUS Admin Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil" -Filter * | select -ExpandProperty SamAccountName
+$DomAccounts = Get-ADUser -SearchBase $fqdn
+$AdmAccounts = Get-ADUser -SearchBase $fqdn
+$UsrAccounts = Get-ADUser -SearchBase $fqdn
+$AAAaccounts = Get-ADUser -SearchBase $fqdn
+$PusAccounts = Get-ADUser -SearchBase $fqdn | select -property SamAccountName
 
 function Create-Dom-Acct{
     $NewDomAcct = "$NewUsrFirst.$NewUsrLast.dom".ToLower()
