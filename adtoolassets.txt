@@ -1,0 +1,3 @@
+﻿$cnd_ous = Get-ADOrganizationalUnit -SearchBase 'OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+    select name
+

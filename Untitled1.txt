@@ -1,0 +1,2 @@
+Get-WmiObject -Class Win32_UserAccount -ComputerName FEYOCS01 -Property * |
+ select Name,Disabled,PasswordExpires;
