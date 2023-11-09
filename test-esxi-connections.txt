@@ -31,7 +31,7 @@ $message = $currentsystem + ' - Script succesfully ran on ' + $date + ' by ' + $
 $nodes = @()
 
 # populate nodes array with hostnames of ESX servers
-$nodes = 'FEYOSX01', 'FEYOSX02', 'FEYOSX03', 'FEYOSX04', 'FEYOSX05', 'FEYOSX06'
+$nodes = $replaceMe
 
 # initialize foreach loop to iterate through each server in the nodes array
 foreach($node in $nodes){
