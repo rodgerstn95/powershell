@@ -23,7 +23,7 @@ function Create-Dom-Acct{
         -Enabled $AcctEnCheckBox.Checked `
         -AccountPassword $NewUsrPass `
         -ChangePasswordAtLogon $ChgePassCheckBox.Checked `
-        -Path "OU=Domain Administrator Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil"
+        -Path $fqdn
     Get-ADUser -Identity $DomTemplateBox.Text -Properties MemberOf | Select-Object -ExpandProperty MemberOf | Add-ADGroupMember -Members $NewDomAcct
     $Usr = [bool] (Get-ADUser -Properties SamAccountName "$NewDomAcct") 
     if ($Usr -eq $true){
@@ -65,7 +65,7 @@ function Create-Usr-Acct{
         -Enabled $AcctEnCheckBox.Checked `
         -AccountPassword $NewUsrPass `
         -ChangePasswordAtLogon $ChgePassCheckBox.Checked `
-        -Path "OU=User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil"
+        -Path $replaceme
     Get-ADUser -Identity $UsrTemplateBox.Text -Properties MemberOf | Select-Object -ExpandProperty MemberOf | Add-ADGroupMember -Members $NewUsrAcct
     $Usr = [bool] (Get-ADUser -Properties SamAccountName "$NewUsrAcct")
     if ($Usr -eq $true){
@@ -87,7 +87,7 @@ function Create-AAA-Acct{
         -Enabled $AcctEnCheckBox.Checked `
         -AccountPassword $NewUsrPass `
         -ChangePasswordAtLogon $ChgePassCheckBox.Checked `
-        -Path "OU=AAA User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil"
+        -Path $replacemme
     Get-ADUser -Identity $AAATemplateBox.Text -Properties MemberOf | Select-Object -ExpandProperty MemberOf | Add-ADGroupMember -Members $NewAAAacct
     $Usr = [bool] (Get-ADUser -Properties SamAccountName "$NewAAAacct")
     if ($Usr -eq $true){
@@ -108,7 +108,7 @@ function Create-Pus-Acct{
         -Enabled $AcctEnCheckBox.Checked `
         -AccountPassword $NewUsrPass `
         -ChangePasswordAtLogon $ChgePassCheckBox.Checked `
-        -Path "OU=PUS Admin Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil"
+        -Path $replaceMe
     Get-ADUser -Identity $PusTemplateBox.Text -Properties MemberOf | Select-Object -ExpandProperty MemberOf | Add-ADGroupMember -Members $NewPusAcct
     $Usr = [bool] (Get-ADUser -Properties SamAccountName "$NewPusAcct")
     if ($Usr -eq $true){
