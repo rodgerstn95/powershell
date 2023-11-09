@@ -8,7 +8,7 @@ function Intilialize-Script(){
 
 $cred = Get-Credential -Message 'Please type domain administrator credentials'
 $session_option = New-PSSessionOption -IdleTimeout 300000
-$global:session = New-PSSession -ComputerName 'NFEYOCNDDCS1' -Credential ($cred) -SessionOption $session_option
+$global:session = New-PSSession -ComputerName $replaceMe -Credential ($cred) -SessionOption $session_option
 
 
 Invoke-Command $session -scriptblock {Import-Module ActiveDirectory} | out-null
@@ -26,28 +26,28 @@ Intilialize-Script
 # $users_ou_array = Get-ADOrganizationalUnit -Filter * -SearchBase 'OU=User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
    # select -ExpandProperty SamAccountName
 
-$svc_ou_array = Get-ADUser -Filter * -SearchBase 'OU=Service Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+$svc_ou_array = Get-ADUser -Filter * -SearchBase $replaceMe |
     select -ExpandProperty SamAccountName;
 
-$domain_ou_array = Get-ADUser -Filter * -SearchBase 'OU=Domain Administrator Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+$domain_ou_array = Get-ADUser -Filter * -SearchBase $replaceMe |
     select -ExpandProperty SamAccountName;
 
-$aaa_ou_array = Get-ADUser -Filter * -SearchBase 'OU=AAA User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+$aaa_ou_array = Get-ADUser -Filter * -SearchBase $replaceMe |
     select -ExpandProperty SamAccountName;
 
-$splunk_ou_array = Get-ADUser -Filter * -SearchBase 'OU=NCDOC_Splunk_Admins,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+$splunk_ou_array = Get-ADUser -Filter * -SearchBase $replaceMe |
     select -ExpandProperty SamAccountName;
 
-# $acas_ou_array = Get-ADOrganizationalUnit -Filter * -SearchBase 'OU=,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+# $acas_ou_array = Get-ADOrganizationalUnit -Filter * -SearchBase $replaceMe |
    # select -ExpandProperty SamAccountName;
 
-$usr_ou_array = Get-ADUser -Filter * -SearchBase 'OU=User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+$usr_ou_array = Get-ADUser -Filter * -SearchBase $replaceMe |
     select -ExpandProperty SamAccountName;
 
-$pus_ou_array = Get-ADUser -Filter * -SearchBase 'OU=PUS Admin Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+$pus_ou_array = Get-ADUser -Filter * -SearchBase $replaceMe |
     select -ExpandProperty SamAccountName;
 
-$admins_ou_array = Get-ADUser -Filter * -SearchBase 'OU=Administrative User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+$admins_ou_array = Get-ADUser -Filter * -SearchBase $replaceMe |
     select -ExpandProperty SamAccountName;
 
 
