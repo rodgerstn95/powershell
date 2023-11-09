@@ -3,7 +3,7 @@ function Intilialize-Script(){
 
 $cred = Get-Credential -Message 'Please type domain administrator credentials'
 $options = New-PSSessionOption -IdleTimeout 300000
-$global:session = New-PSSession -ComputerName 'NFEYOCNDDCS1' -Credential ($cred) -SessionOption $options
+$global:session = New-PSSession -ComputerName $replaceMe -Credential ($cred) -SessionOption $options
 
 
 Invoke-Command $session -scriptblock {Import-Module ActiveDirectory} | out-null
@@ -17,7 +17,7 @@ Import-PSSession -Session $session -Module ActiveDirectory -AllowClobber | out-n
 Intilialize-Script
 
 
-$groups = 'Domain Admins', 'FEYO_Windows_Admins';
+$groups = $replaceMe, $replaceMe;
 
 foreach($group in $groups){
 
