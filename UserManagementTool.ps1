@@ -4,7 +4,7 @@ function Intilialize-Script(){
 
 $cred = Get-Credential -Message 'Please type domain administrator credentials'
 $session_option = New-PSSessionOption -IdleTimeout 300000
-$global:session = New-PSSession -ComputerName 'NFEYOCNDDCS1' -Credential ($cred) -SessionOption $session_option
+$global:session = New-PSSession -ComputerName $replaceMe -Credential ($cred) -SessionOption $session_option
 
 
 Invoke-Command $session -scriptblock {Import-Module ActiveDirectory} | out-null
@@ -115,41 +115,41 @@ $vers = "1.0"
 $nl = "`r`n"
 
 # AAA User OU distinguished name path, where the account is inactive
-$aaaOU = Get-ADUser -Filter * -SearchBase 'OU=AAA User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' -Properties *
+$aaaOU = Get-ADUser -Filter * -SearchBase $replaceMe -Properties *
 
 # Admin Accounts OU distinguished name path, where the account is inactive
-$adminOU = Get-ADUser -Filter * -SearchBase 'OU=Administrative User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' -Properties *
+$adminOU = Get-ADUser -Filter * -SearchBase $replaceMe -Properties *
 
 # Domain Admin Accounts OU distinguished name path, where the account is inactive
-$domainOU = Get-ADUser -Filter * -SearchBase 'OU=Domain Administrator Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' -Properties *
+$domainOU = Get-ADUser -Filter * -SearchBase $replaceMe -Properties *
 
 # User Accounts OU distinguished name path, where the account is inactive
-$userOU = Get-ADUser -Filter * -SearchBase 'OU=User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' -Properties *
+$userOU = Get-ADUser -Filter * -SearchBase $replaceMe -Properties *
 
 # PUS Accounts OU distinguished name path, where the account is inactive
-$pusOU = Get-ADUser -Filter * -SearchBase 'OU=PUS Admin Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' -Properties *
+$pusOU = Get-ADUser -Filter * -SearchBase $replaceMe -Properties *
 
 # User Accounts (Outside of CNDS) OU distinguished name path, where the account is inactive
-$externaluserOU = Get-ADUser -Filter * -SearchBase 'CN=Users,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' -Properties *
+$externaluserOU = Get-ADUser -Filter * -SearchBase '$replaceMe' -Properties *
 
 # AAA User OU distinguished name path, where the account is disabled
-$aaaOU_DisabledUsers = Get-ADUser -Filter * -SearchBase 'OU=AAA User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+$aaaOU_DisabledUsers = Get-ADUser -Filter * -SearchBase $replaceMe |
     where {$_.Enabled -eq $false}
 
 # Admin Accounts OU distinguished name path, where the account is disabled
-$adminOU_DisabledUsers = Get-ADUser -Filter * -SearchBase 'OU=Administrative User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+$adminOU_DisabledUsers = Get-ADUser -Filter * -SearchBase $replaceMe |
     where {$_.Enabled -eq $false}
 
 # Domain Admin Accounts OU distinguished name path, where the account is disabled
-$domainOU_DisabledUsers = Get-ADUser -Filter * -SearchBase 'OU=Domain Administrator Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+$domainOU_DisabledUsers = Get-ADUser -Filter * -SearchBase $replaceMe |
     where {$_.Enabled -eq $false}
 
 # User Accounts OU distinguished name path, where the account is disabled
-$userOU_DisabledUsers = Get-ADUser -Filter * -SearchBase 'OU=User Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+$userOU_DisabledUsers = Get-ADUser -Filter * -SearchBase $replaceMe |
     where {$_.Enabled -eq $false}
 
 # PUS Accounts OU distinguished name path, where the account is disabled
-$pusOU_DisabledUsers = Get-ADUser -Filter * -SearchBase 'OU=PUS Admin Accounts,OU=Users,OU=CNDS,DC=feyo,DC=onenet,DC=oob,DC=navy,DC=mil' |
+$pusOU_DisabledUsers = Get-ADUser -Filter * -SearchBase $replaceMe |
     where {$_.Enabled -eq $false}
 
 function Move-DisabledAccounts
